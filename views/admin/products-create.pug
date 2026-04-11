@@ -1,0 +1,34 @@
+extends ./admin.pug
+block main
+    h1 ➕ Thêm mới Sản phẩm
+    hr
+
+    div.mb-3
+        a.btn.btn-outline-secondary(href="/admin/products") ⬅ Quay lại
+
+    //- Form (Method POST)
+    form.border.p-4.rounded.shadow-sm.bg-white(action="/admin/products/create" method="POST")
+
+        div.mb-3
+            label.form-label.fw-bold Tên sản phẩm *
+            input.form-control(type="text" name="title"  required)
+
+        div.row.mb-3
+            div.col-md-6
+                label.form-label.fw-bold Giá bán ($US) *
+                input.form-control(type="number" name="price" min="0" required)
+
+            div.col-md-6
+                label.form-label.fw-bold Danh mục
+                input.form-control(type="text" name="category" )
+
+        div.mb-3
+            label.form-label.fw-bold Link ảnh (Thumbnail URL)
+            //- img placeholders
+            input.form-control(type="text" name="thumbnail" placeholder="https://example.com/image.png")
+
+        div.mb-3
+            label.form-label.fw-bold Mô tả sản phẩm
+            textarea.form-control(name="description" rows="5" )
+
+        button.btn.btn-primary.px-5(type="submit") 💾 Lưu Sản Phẩm

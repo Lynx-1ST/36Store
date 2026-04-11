@@ -8,6 +8,11 @@ const productSchema = new mongoose.Schema({
   brand: String,
   rating: Number,
   thumbnail: String,
+  deleted: {
+    type: Boolean,
+    default: false,
+  },
+  deletedAt: Date,
 });
 
 const Product = mongoose.model("Product", productSchema, "products");

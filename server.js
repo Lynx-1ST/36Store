@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
-import routes from "./routes/client/index.routes.js";
+import adminRoutes from "./routes/admin/index.routes.js";
+import clientRoutes from "./routes/client/index.routes.js";
 
 // Kết nối DB
 try {
@@ -20,9 +21,14 @@ app.set("views", "./views");
 app.set("view engine", "pug");
 
 app.use(express.static("public"));
+// Giúp Express dịch được dữ liệu từ Form HTML (method="POST")
+app.use(express.urlencoded({ extended: true }));
+// Giúp Express dịch được dữ liệu dạng JSON (API)
+app.use(express.json());
 
-// Routes
-routes(app);
+app.use("/admin", adminRoutes);
+
+clientRoutes(app);
 
 app.listen(port, () => {
   console.log(`Server đang chạy tại http://localhost:${port}`);
