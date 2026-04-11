@@ -1,0 +1,22 @@
+extends layouts/default.pug
+include mixins/box-head.pug
+
+block main
+    +box-head("Liên Hệ", "Để lại thông tin, chúng tôi sẽ hỗ trợ bạn")
+
+    div.row
+        div.col-md-6
+            if message
+                div.alert.alert-info #{message}
+
+            form.border.p-4.rounded.shadow-sm
+                div.mb-3
+                    label.form-label Họ và tên
+                    input.form-control(type="text" placeholder="Nhập tên của bạn")
+                div.mb-3
+                    label.form-label Email
+                    input.form-control(type="email" placeholder="name@example.com")
+                div.mb-3
+                    label.form-label Lời nhắn
+                    textarea.form-control(rows="4" placeholder="Bạn cần hỗ trợ gì?")
+                button.btn.btn-success.w-100(type="button") Gửi liên hệ

@@ -1,0 +1,33 @@
+header.shadow-sm.sticky-top.bg-white
+    nav.navbar.navbar-expand-lg.navbar-light.py-3
+        div.container
+            //- Logo
+            a.navbar-brand.fw-bold.text-primary.fs-4(href="/") 
+                | 🚀 36Store
+
+            //- Nút bấm cho mobile (Hamburger Menu)
+            button.navbar-toggler(type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent")
+                span.navbar-toggler-icon
+
+            //- Nội dung Menu
+            div.collapse.navbar-collapse#navbarContent
+                ul.navbar-nav.me-auto.mb-2.mb-lg-0
+                    li.nav-item
+                        a.nav-link.fw-medium(href="/") Trang chủ
+                    li.nav-item
+                        a.nav-link.fw-medium.active(href="/products") Sản phẩm
+                    li.nav-item
+                        a.nav-link.fw-medium(href="/contact") Liên hệ
+
+                //- Thanh tìm kiếm
+                form.d-flex.me-3.w-25(role="search")
+                    input.form-control.me-2.rounded-pill(type="search" placeholder="Bạn tìm gì..." aria-label="Search")
+                    button.btn.btn-outline-primary.rounded-pill(type="button") 🔍
+
+                //- Cụm nút bấm Giỏ hàng & Đăng nhập
+                div.d-flex.align-items-center.mt-3.mt-lg-0
+                    a.btn.btn-light.position-relative.me-3(href="/cart")
+                        | 🛒 Giỏ hàng
+                        //- Badge báo số lượng (Tạm thời hardcode là 3)
+                        span.position-absolute.top-0.start-100.translate-middle.badge.rounded-pill.bg-danger 3
+                    a.btn.btn-primary.rounded-pill.px-4(href="/login") Đăng nhập

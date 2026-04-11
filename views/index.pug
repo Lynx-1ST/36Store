@@ -1,0 +1,14 @@
+extends layouts/default.pug
+include mixins/box-head.pug
+
+block main
+    +box-head("Trang Chủ", "Chào mừng bạn đến với hệ thống quản lý sản phẩm!")
+
+    //- Hiển thị tin nhắn từ server
+    div.alert.alert-success
+        h5 Thông điệp từ Server:
+        p.mb-0 #{message}
+
+    div.mt-4
+        p Khám phá ngay các mặt hàng mới nhất của chúng tôi với giá cực sốc.
+        a.btn.btn-primary.btn-lg(href="/products") Xem danh sách sản phẩm ngay
