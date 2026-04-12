@@ -1,0 +1,47 @@
+extends ./admin.pug
+
+block main
+    h1 📬 Quản lý Liên hệ
+    hr
+
+    table.table.table-hover.table-bordered.align-middle
+        thead.table-dark
+            tr
+                th STT
+                th Người gửi
+                th Email
+                th Lời nhắn
+                th Trạng thái
+                th Ngày gửi
+                th Hành động
+        tbody
+            if contacts.length > 0
+                each item, index in contacts
+                    tr
+                        td #{index + 1}
+                        td.fw-bold #{item.name}
+                        td #{item.email}
+                        td #{item.message.length > 50 ? item.message.substring(0, 50) + '...' : item.message}
+
+                        td 
+                            if item.status === "new"
+                                form(action=`/admin/contacts/change-status/${item._id}` method="POST")
+                                    input(type="hidden" name="status" value="done")
+                                    button.badge.bg-danger.border-0(type="submit" style="cursor: pointer;") Mới
+                            else 
+                                form(action=`/admin/contacts/change-status/${item._id}` method="POST")
+                                    input(type="hidden" name="status" value="new")
+                                    button.badge.bg-success.border-0(type="submit" style="cursor: pointer;") Đã xử lý
+
+                        td #{new Date(item.createdAt).toLocaleString('vi-VN')}
+
+                        td
+                            form(action=`/admin/contacts/delete/${item._id}` method="POST" style="display:inline-block;")
+                                button.btn.btn-danger.btn-sm(
+                                    type="submit"
+                                    onclick="return confirm('Bạn có chắc chắn muốn xóa liên hệ này không?');" 
+                                ) 🗑️ Xóa
+            else
+                tr
+                    td(colspan="7" class="text-center text-muted py-4") 
+                        | Chưa có tin nhắn liên hệ nào.

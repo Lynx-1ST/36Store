@@ -6,16 +6,17 @@ block main
 
     div.row
         div.col-md-6
+            //- Thông báo gửi thành công/thất bại
             if successMessage
                 div.alert.alert-success #{successMessage}
-            if message
-                div.alert.alert-info #{message}
+            if errorMessage
+                div.alert.alert-danger #{errorMessage}
 
-            //- 1. method="POST" và route
+            //- Form (Đã sửa name="name")
             form.border.p-4.rounded.shadow-sm(action="/contact" method="POST")
                 div.mb-3
                     label.form-label Họ và tên
-                    input.form-control(type="text" name="fullName" placeholder="Nhập tên của bạn" required)
+                    input.form-control(type="text" name="name" placeholder="Nhập tên của bạn" required)
 
                 div.mb-3
                     label.form-label Email

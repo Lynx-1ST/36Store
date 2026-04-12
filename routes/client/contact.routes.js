@@ -1,24 +1,38 @@
 import express from "express";
+import Contact from "../../models/contact.model.js";
 
-const routes = express.Router();
+const router = express.Router();
 
-// [GET] /contact
-routes.get("/", async (req, res) => {
+router.get("/", (req, res) => {
   res.render("contact", {
-    pageTitle: "Trang liên hệ",
-    message: "Xin chào các bạn",
+    pageTitle: "Liên hệ với chúng tôi",
   });
 });
 
-// [POST] /contact
-routes.post("/", async (req, res) => {
-  const userNote = req.body;
-  console.log("Note: ", userNote);
+router.post("/", async (req, res) => {
+  try {
+    const { name, email, message } = req.body;
 
-  res.render("contact", {
-    pageTitle: "Liên hệ",
-    successMessage: "Cảm ơn bạn! Chúng tôi đã nhận được thông tin.",
-  });
+    if (!name || !email || !message) {
+      return res.render("contact", {
+        errorMessage: "Vui lòng nhập đầy đủ thông tin!",
+      });
+    }
+
+    const newContact = new Contact({
+      name,
+      email,
+      message,
+    });
+
+    await newContact.save();
+    return res.render("contact", {
+      successMessage: "Gửi thành công!",
+    });
+  } catch (error) {
+    console.error(error);
+    return res.send("Lỗi!");
+  }
 });
 
-export default routes;
+export default router;

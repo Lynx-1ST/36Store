@@ -4,21 +4,21 @@ block main
     h1 📊 Bảng điều khiển (Dashboard)
     hr
 
-    div.row.mt-4
-        div.col-4
-            div.card.bg-primary.text-white.mb-3
-                div.card-body
+    .row.mt-4
+        .col-4
+            .card.bg-primary.text-white.mb-3
+                .card-body
                     h5 Tổng số Sản phẩm
-                    h2 150
+                    h2= totalProducts
 
-        div.col-4
-            div.card.bg-success.text-white.mb-3
-                div.card-body
+        .col-4
+            .card.bg-success.text-white.mb-3
+                .card-body
                     h5 Đơn hàng mới
-                    h2 12
+                    h2= totalOrders
 
-        div.col-4
-            div.card.bg-warning.text-dark.mb-3
-                div.card-body
+        .col-4
+            .card.bg-warning.text-dark.mb-3
+                .card-body
                     h5 Liên hệ mới
-                    h2 5
+                    h2= totalContacts

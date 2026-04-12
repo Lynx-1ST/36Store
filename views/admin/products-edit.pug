@@ -1,0 +1,55 @@
+extends ./admin.pug
+
+block main
+    h1 ✏️ Chỉnh sửa Sản phẩm
+    hr
+
+    div.mb-3
+        a.btn.btn-outline-secondary(href="/admin/products") ⬅ Quay lại
+
+    //- Form gửi đến route edit kèm ID sản phẩm
+    form.border.p-4.rounded.shadow-sm.bg-white(
+        action=`/admin/products/edit/${product.id}` 
+        method="POST"
+    )
+        div.mb-3
+            label.form-label.fw-bold Tên sản phẩm *
+            input.form-control(
+                type="text" 
+                name="title" 
+                value=product.title 
+                required
+            )
+
+        div.row.mb-3
+            div.col-md-6
+                label.form-label.fw-bold Giá bán ($) *
+                input.form-control(
+                    type="number" 
+                    name="price" 
+                    value=product.price 
+                    min="0" 
+                    required
+                )
+
+            div.col-md-6
+                label.form-label.fw-bold Danh mục
+                input.form-control(
+                    type="text" 
+                    name="category" 
+                    value=product.category
+                )
+
+        div.mb-3
+            label.form-label.fw-bold Link ảnh (Thumbnail URL)
+            input.form-control(
+                type="text" 
+                name="thumbnail" 
+                value=product.thumbnail
+            )
+
+        div.mb-3
+            label.form-label.fw-bold Mô tả sản phẩm
+            textarea.form-control(name="description" rows="5") #{product.description}
+
+        button.btn.btn-primary.px-5(type="submit") 💾 Cập nhật sản phẩm

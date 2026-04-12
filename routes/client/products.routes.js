@@ -1,19 +1,20 @@
 import express from "express";
 import Product from "../../models/product.model.js";
 
-const routes = express.Router();
+const router = express.Router();
 
-routes.get("/", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
-    const products = await Product.find({});
-    res.render("products", {
+    const products = await Product.find({ deleted: false });
+
+    return res.render("products", {
       pageTitle: "Danh sách sản phẩm",
       products,
     });
   } catch (error) {
     console.error(error);
-    res.status(500).send("Lỗi lấy dữ liệu");
+    return res.status(500).send("Lỗi lấy dữ liệu");
   }
 });
 
-export default routes;
+export default router;

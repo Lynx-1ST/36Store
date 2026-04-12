@@ -20,12 +20,12 @@ const port = 3000;
 app.set("views", "./views");
 app.set("view engine", "pug");
 
+// Middleware parse data
 app.use(express.static("public"));
-// Giúp Express dịch được dữ liệu từ Form HTML (method="POST")
+// Form HTML (method="POST")
 app.use(express.urlencoded({ extended: true }));
-// Giúp Express dịch được dữ liệu dạng JSON (API)
+// JSON (API)
 app.use(express.json());
-
 app.use("/admin", adminRoutes);
 
 clientRoutes(app);
