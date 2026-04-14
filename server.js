@@ -1,5 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
+import cookieParser from "cookie-parser";
 import adminRoutes from "./routes/admin/index.routes.js";
 import clientRoutes from "./routes/client/index.routes.js";
 
@@ -15,10 +16,10 @@ const port = 3000;
 
 // REQ: CLIENT -> ROUTING -> CONTROLLER -> MODEL -> DB
 // RES: DB -> MODEL -> CONTROLLER -> VIEW -> CLIENT
-
 app.set("views", "./views");
 app.set("view engine", "pug");
 
+app.use(cookieParser());
 // Middleware parse data
 app.use(express.static("public"));
 // Form HTML (method="POST")

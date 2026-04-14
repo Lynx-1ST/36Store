@@ -1,7 +1,7 @@
 import productRoutes from "./products.routes.js";
 import contactRoutes from "./contact.routes.js";
 import Product from "../../models/product.model.js";
-
+import cartRoutes from "../../models/cart.model.js";
 export default (app) => {
   app.get("/", async (req, res) => {
     try {
@@ -23,6 +23,7 @@ export default (app) => {
   // Routes
   app.use("/products", productRoutes);
   app.use("/contact", contactRoutes);
+  app.use("/cart", cartRoutes);
 
   app.get("/blog", (req, res) => {
     return res.send(

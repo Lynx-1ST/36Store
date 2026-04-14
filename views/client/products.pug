@@ -64,8 +64,11 @@ block main
                                         del.text-muted.small.ms-2 #{(item.price * 1.2).toLocaleString('vi-VN')} $
 
                                 div.d-grid
-                                    button.btn.btn-outline-primary.btn-sm.fw-bold(type="button") 
+                                form(action=`/cart/add/${item._id}` method="POST")
+                                    input(type="hidden" name="quantity" value="1")
+                                    button.btn.btn-outline-primary.btn-sm.fw-bold.w-100(type="submit") 
                                         | 🛒 Thêm vào giỏ
+
 
         else
             div.col-12
