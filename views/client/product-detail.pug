@@ -1,0 +1,80 @@
+extends ../layouts/default.pug
+
+block main
+    div.container.my-5
+        div.mb-4
+            a.text-decoration-none.text-muted(href="/") ⬅ Quay lại trang chủ
+
+        div.row.bg-white.p-4.rounded.shadow-sm
+            div.col-md-5.text-center.mb-4.mb-md-0
+                img.img-fluid.rounded.border.p-3(
+                    src=(product.images && product.images.length > 0 ? product.images[0] : product.thumbnail)
+                    alt=product.title
+                    style="max-height: 400px; object-fit: contain;"
+                )
+
+            div.col-md-7
+                h1.fw-bold.mb-2 #{product.title}
+                div.mb-3
+                    if product.brand
+                        span.badge.bg-primary.me-2 Thương hiệu: #{product.brand}
+                    span.badge.bg-warning.text-dark ⭐ #{product.rating} / 5
+                    span.text-muted.ms-2 (SKU: #{product.sku})
+
+                div.bg-light.p-3.rounded.mb-4
+                    if product.discountPercentage > 0
+                        - var finalPrice = product.price * (1 - product.discountPercentage / 100)
+                        span.text-danger.fw-bold.display-6 $#{finalPrice.toFixed(2)}
+                        span.text-muted.text-decoration-line-through.ms-3 $#{product.price}
+                        span.badge.bg-danger.ms-2 -#{product.discountPercentage}%
+                    else
+                        span.text-danger.fw-bold.display-6 $#{product.price}
+
+                ul.list-unstyled.mb-4.lh-lg
+                    li 📦 Trạng thái: 
+                        if product.stock > 0
+                            span.text-success.fw-bold #{product.availabilityStatus} (Còn #{product.stock} sp)
+                        else
+                            span.text-danger.fw-bold Hết hàng!
+                    li 🛡️ Bảo hành: #{product.warrantyInformation}
+                    li 🚚 Giao hàng: #{product.shippingInformation}
+                    li 🔄 Đổi trả: #{product.returnPolicy}
+
+                form(action=`/cart/add/${product._id}` method="POST")
+                    div.d-flex.align-items-center.gap-3.mb-4
+                        label.fw-bold Số lượng:
+                        input.form-control.text-center(
+                            type="number" 
+                            name="quantity" 
+                            value=product.minimumOrderQuantity || 1 
+                            min=product.minimumOrderQuantity || 1 
+                            max=product.stock 
+                            style="width: 80px;"
+                        )
+
+                    div.d-flex.gap-3
+                        button.btn.btn-danger.btn-lg.w-100(type="submit" disabled=(product.stock === 0)) 
+                            b MUA NGAY
+                        button.btn.btn-outline-primary.btn-lg.w-100(type="submit" disabled=(product.stock === 0)) 🛒 Thêm vào giỏ
+
+        div.row.mt-5
+            div.col-12
+                div.bg-white.p-4.rounded.shadow-sm
+                    h4.border-bottom.pb-2.mb-4 📝 Đặc điểm nổi bật
+                    div.product-description.mb-5(style="line-height: 1.8;")
+                        | #{product.description}
+
+
+                    if product.reviews && product.reviews.length > 0
+                        h4.border-bottom.pb-2.mb-4 💬 Đánh giá từ khách hàng
+                        div.row
+                            each review in product.reviews
+                                div.col-md-6.mb-3
+                                    div.p-3.border.rounded.bg-light.h-100
+                                        div.d-flex.justify-content-between.mb-2
+                                            strong #{review.reviewerName}
+                                            span.text-warning 
+                                                - for (let i = 0; i < Math.floor(review.rating); i++)
+                                                    | ⭐
+                                        p.mb-1.fst-italic "#{review.comment}"
+                                        small.text-muted #{new Date(review.date).toLocaleDateString('vi-VN')}

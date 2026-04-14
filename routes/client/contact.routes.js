@@ -4,7 +4,7 @@ import Contact from "../../models/contact.model.js";
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  res.render("contact", {
+  res.render("client/contact", {
     pageTitle: "Liên hệ với chúng tôi",
   });
 });
@@ -14,7 +14,7 @@ router.post("/", async (req, res) => {
     const { name, email, message } = req.body;
 
     if (!name || !email || !message) {
-      return res.render("contact", {
+      return res.render("client/contact", {
         errorMessage: "Vui lòng nhập đầy đủ thông tin!",
       });
     }
@@ -26,7 +26,7 @@ router.post("/", async (req, res) => {
     });
 
     await newContact.save();
-    return res.render("contact", {
+    return res.render("client/contact", {
       successMessage: "Gửi thành công!",
     });
   } catch (error) {

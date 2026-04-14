@@ -1,18 +1,16 @@
-extends layouts/default.pug
-include mixins/box-head.pug
+extends ../layouts/default.pug
+include ../mixins/box-head.pug
 
 block main
     +box-head("Liên Hệ", "Để lại thông tin, chúng tôi sẽ hỗ trợ bạn")
 
     div.row
         div.col-md-6
-            //- Thông báo gửi thành công/thất bại
             if successMessage
                 div.alert.alert-success #{successMessage}
             if errorMessage
                 div.alert.alert-danger #{errorMessage}
 
-            //- Form (Đã sửa name="name")
             form.border.p-4.rounded.shadow-sm(action="/contact" method="POST")
                 div.mb-3
                     label.form-label Họ và tên

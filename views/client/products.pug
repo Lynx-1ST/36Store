@@ -1,5 +1,5 @@
-extends layouts/default.pug
-include mixins/box-head.pug
+extends ../layouts/default.pug
+include ../mixins/box-head.pug
 
 block main
     style.
@@ -25,7 +25,6 @@ block main
 
     +box-head("Sản Phẩm Nổi Bật", "Khám phá bộ sưu tập mới nhất với giá cực sốc")
 
-    //- Dùng g-4 (gap) để tạo khoảng cách đều nhau giữa các sản phẩm
     div.row.g-4.mb-5
         if products.length > 0
             each item in products
@@ -57,7 +56,7 @@ block main
                                 span.text-warning ⭐⭐⭐⭐⭐ 
                                 span.text-muted.ms-1 (#{item.rating || 5.0})
 
-                            //- Phần dưới cùng (Giá & Nút mua)
+                            //- Giá & Nút mua
                             div.mt-auto
                                 div.mb-3
                                     span.text-danger.fw-bold.fs-5 #{item.price ? item.price.toLocaleString('vi-VN') : 0} $
@@ -69,7 +68,6 @@ block main
                                         | 🛒 Thêm vào giỏ
 
         else
-            //- Giao diện khi không có sản phẩm
             div.col-12
                 div.alert.alert-light.text-center.p-5.border.rounded-3(role="alert")
                     h3.text-muted 😢 Ôi không!

@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 import adminRoutes from "./routes/admin/index.routes.js";
 import clientRoutes from "./routes/client/index.routes.js";
 
-// Kết nối DB
 try {
   await mongoose.connect("mongodb://127.0.0.1:27017/products-manager");
   console.log("Kết nối Database thành công!");

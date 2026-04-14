@@ -2,7 +2,6 @@ extends layouts/default.pug
 include mixins/box-head.pug
 
 block main
-    //- 1. PHẦN CHÀO MỪNG (Code cũ của bạn)
     +box-head("Trang Chủ", "Chào mừng bạn đến với hệ thống quản lý sản phẩm!")
 
     if message
@@ -16,7 +15,6 @@ block main
 
     hr.my-5
 
-    //- 2. PHẦN TRƯNG BÀY SẢN PHẨM (Mới thêm)
     h2.text-center.mb-4.text-danger 🔥 Sản phẩm nổi bật 🔥
 
     div.row

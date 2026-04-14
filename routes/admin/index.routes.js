@@ -9,7 +9,9 @@ const router = express.Router();
 // [GET] Dashboard
 router.get("/dashboard", async (req, res) => {
   try {
-    const totalProducts = await Product.countDocuments({ deleted: false });
+    const totalProducts = await Product.countDocuments({
+      deleted: { $ne: true },
+    });
     const totalContacts = await Contact.countDocuments();
 
     return res.render("admin/dashboard", {

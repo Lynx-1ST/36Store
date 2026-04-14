@@ -7,7 +7,7 @@ const router = express.Router();
 // [GET] Danh sách sản phẩm
 router.get("/", async (req, res) => {
   try {
-    const products = await Product.find({ deleted: false });
+    const products = await Product.find({ deleted: { $ne: true } });
 
     return res.render("admin/products", {
       pageTitle: "Quản lí sản phẩm",
